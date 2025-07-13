@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Étoiles Françaises - French Michelin Restaurant Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: url('restaurant-bg.jpg') center center/cover no-repeat fixed;
+            color: #222;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(120deg, rgba(18,32,61,0.7) 0%, rgba(212,175,55,0.2) 100%);
+            z-index: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 48px 0 28px 0;
+            background: rgba(18,32,61,0.85);
+            box-shadow: 0 6px 24px rgba(18,32,61,0.12);
+            position: relative;
+            border-radius: 0 0 36px 36px;
+            border-bottom: 3px solid #d4af37;
+            z-index: 1;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 12px rgba(18,32,61,0.18);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 6px rgba(18,32,61,0.18);
+        }
+
+        .chatbot-label {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            text-shadow: 0 1px 4px rgba(18,32,61,0.18);
+        }
+        .chatbot-name {
+            color: #d4af37;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .welcome-section {
+            padding: 56px 0 48px 0;
+            background: rgba(255,255,255,0.92);
+            border-radius: 28px;
+            box-shadow: 0 8px 32px rgba(18,32,61,0.10);
+            margin: 56px auto;
+            max-width: 800px;
+            border: 2px solid #d4af37;
+            position: relative;
+            z-index: 1;
+        }
+        .welcome-container {
+            background: rgba(18,32,61,0.08);
+            border-radius: 20px;
+            padding: 40px 32px;
+            margin: 0 auto;
+            max-width: 650px;
+            box-shadow: 0 4px 16px rgba(212,175,55,0.10);
+            text-align: center;
+        }
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #d4af37;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 8px rgba(18,32,61,0.18);
+        }
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37 0%, #fff 100%);
+            border-radius: 2px;
+            margin: 0 auto 28px auto;
+        }
+        .welcome-description {
+            font-size: 1.25rem;
+            color: #12203d;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .french-motif {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 18px;
+        }
+
+        .dishes-section {
+            padding: 32px 0 48px 0;
+            background: rgba(255,255,255,0.90);
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(18,32,61,0.08);
+            margin: 32px auto 0 auto;
+            max-width: 800px;
+            border: 1.5px solid #d4af37;
+            position: relative;
+            z-index: 1;
+        }
+        .dishes-container {
+            padding: 0 32px;
+        }
+        .dishes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: #d4af37;
+            margin-bottom: 24px;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(18,32,61,0.10);
+        }
+        .dishes-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .dish-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(212,175,55,0.08);
+            border-left: 5px solid #d4af37;
+            padding: 22px 18px;
+            max-width: 320px;
+            min-width: 220px;
+            margin-bottom: 12px;
+        }
+        .dish-img {
+            width: 100%;
+            max-width: 220px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .dish-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #12203d;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .dish-desc {
+            font-size: 1rem;
+            color: #444;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            .welcome-container {
+                padding: 28px;
+            }
+            .welcome-section {
+                padding: 24px 0;
+            }
+            .dishes-container {
+                padding: 0 8px;
+            }
+            .dishes-list {
+                gap: 12px;
+            }
+            .dish-card {
+                padding: 16px 8px;
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Les Étoiles Françaises</h1>
+            <p class="subtitle">Discover French Culinary Excellence</p>
+            <div class="chatbot-label">Your assistant: <span class="chatbot-name">Leguide-</span></div>
+        </div>
+    </header>
+
+    <section class="welcome-section">
+        <div class="welcome-container">
+            <div class="french-motif">&#129472; &#127858; &#127863;</div>
+            <h2 class="welcome-title">Bienvenue à Les Étoiles Françaises</h2>
+            <div class="divider"></div>
+            <div class="welcome-description">
+                Experience the finest French restaurants awarded Michelin stars and Bib Gourmand distinctions.<br>
+                Explore a curated selection of culinary gems, where tradition meets innovation in every dish.<br>
+                <span style="color:#d4af37;font-weight:bold;">Savor the art of French gastronomy.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="dishes-section">
+        <div class="dishes-container">
+            <h2 class="dishes-title">Popular French Dishes</h2>
+            <div class="dishes-list">
+                <div class="dish-card">
+                    <img class="dish-img" src="https://poshjournal.com/wp-content/uploads/2020/10/coq-au-vin-recipe-24.jpg" alt="Coq au Vin">
+                    <div class="dish-name">Coq au Vin</div>
+                    <div class="dish-desc">Chicken braised with red wine, mushrooms, bacon, and herbs. A classic from Burgundy.</div>
+                </div>
+                <div class="dish-card">
+                    <img class="dish-img" src="https://lacuisinedegeraldine.fr/wp-content/uploads/2023/07/Bouillabaisse-113.jpg" alt="Bouillabaisse">
+                    <div class="dish-name">Bouillabaisse</div>
+                    <div class="dish-desc">A rich Provençal seafood stew with saffron, garlic, and tomatoes, served with rouille.</div>
+                </div>
+                <div class="dish-card">
+                    <img class="dish-img" src="https://twoplaidaprons.com/wp-content/uploads/2022/12/ratatouille-baked-in-copper-pan-thumbnail.jpg" alt="Ratatouille">
+                    <div class="dish-name">Ratatouille</div>
+                    <div class="dish-desc">A vibrant vegetable medley from Provence, featuring eggplant, zucchini, peppers, and tomatoes.</div>
+                </div>
+                <div class="dish-card">
+                    <img class="dish-img" src="https://tse1.mm.bing.net/th/id/OIP.g1_nyJCHvTg-8HekWCVKNgHaDF?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Duck Confit">
+                    <div class="dish-name">Duck Confit</div>
+                    <div class="dish-desc">Slow-cooked duck leg in its own fat, crispy on the outside, tender within. Southwest French specialty.</div>
+                </div>
+                <div class="dish-card">
+                    <img class="dish-img" src="https://blog.thermoworks.com/wp-content/uploads/2016/02/creme_brulee3-20-of-27.jpg" alt="Crème Brûlée">
+                    <div class="dish-name">Crème Brûlée</div>
+                    <div class="dish-desc">Silky vanilla custard topped with a caramelized sugar crust. The ultimate French dessert.</div>
+                </div>
+                <div class="dish-card">
+                    <img class="dish-img" src="https://tse2.mm.bing.net/th/id/OIP.VNcRs9rcgrqd1UOjtIQodwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tarte Tatin">
+                    <div class="dish-name">Tarte Tatin</div>
+                    <div class="dish-desc">Upside-down caramelized apple tart, a sweet treat from the Loire Valley.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Restaurant data array - add your restaurant data here
+        const restaurantData = [
+            // Example structure for adding restaurants:
+            // {
+            //     id: 1,
+            //     name: "Restaurant Name",
+            //     location: "City, Country",
+            //     address: "Full Address",
+            //     type: "michelin" or "bib",
+            //     stars: "⭐⭐⭐" or "🍽️ Bib Gourmand",
+            //     cuisine: "Cuisine Type",
+            //     description: "Restaurant description",
+            //     priceRange: "$", "$$", "$$$", or "$$$$",
+            //     phone: "Phone Number",
+            //     website: "Website URL"
+            // }
+        ];
+
+        // Always show results section
+        document.getElementById('resultsSection').style.display = 'block';
+    </script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/07/12/04/20250712041233-2MS2Z0OA.js"></script>
+</body>
+</html>
